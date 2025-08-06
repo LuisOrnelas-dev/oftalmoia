@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { FaSearch, FaStethoscope, FaCalendarAlt, FaMapMarkerAlt, FaDollarSign, FaRobot, FaPaperPlane, FaTimes, FaUser, FaSignOutAlt, FaPhone, FaEnvelope, FaMedal, FaGraduationCap } from 'react-icons/fa';
 import { IoMdMedical } from 'react-icons/io';
 import ReactMarkdown from 'react-markdown';
@@ -235,9 +235,9 @@ function OftalmoBot() {
     } else {
       setViewMode('patient');
     }
-  }, [isAuthenticated, user]);
+  }, [isAuthenticated, user, loadDoctorAppointments]);
 
-  const loadDoctors = async () => {
+  const loadDoctors = useCallback(async () => {
     try {
       const response = await doctorsAPI.getAll();
       setDoctors(response.doctors || []);
@@ -248,10 +248,10 @@ function OftalmoBot() {
       setDoctors(mockDoctors);
       setFilteredDoctors(mockDoctors);
     }
-  };
+  }, []);
 
   // Cargar citas del médico
-  const loadDoctorAppointments = async () => {
+  const loadDoctorAppointments = useCallback(async () => {
     if (isAuthenticated && user?.userType === 'doctor') {
       try {
         const response = await appointmentsAPI.getMyAppointments();
@@ -293,7 +293,7 @@ function OftalmoBot() {
         ]);
       }
     }
-  };
+  }, [isAuthenticated, user]);
 
   const handleRegister = async () => {
     if (!registerData.name || !registerData.email || !registerData.password) {
