@@ -164,11 +164,13 @@ const chatAPI = {
     apiRequest('/chat/suggestions')
 };
 
-export default {
+const apiExports = {
   auth: authAPI,
   doctors: doctorsAPI,
   appointments: appointmentsAPI,
   symptoms: symptomsAPI,
   chat: chatAPI,
   healthCheck,
-}; 
+};
+
+export default apiExports; 

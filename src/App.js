@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaSearch, FaStethoscope, FaCalendarAlt, FaMapMarkerAlt, FaDollarSign, FaRobot, FaPaperPlane, FaTimes, FaUser, FaSignOutAlt, FaPhone, FaEnvelope, FaMedal, FaGraduationCap, FaClock, FaHeart } from 'react-icons/fa';
+import { FaSearch, FaStethoscope, FaCalendarAlt, FaMapMarkerAlt, FaDollarSign, FaRobot, FaPaperPlane, FaTimes, FaUser, FaSignOutAlt, FaPhone, FaEnvelope, FaMedal, FaGraduationCap } from 'react-icons/fa';
 import { IoMdMedical } from 'react-icons/io';
 import ReactMarkdown from 'react-markdown';
 import api, { doctorsAPI, appointmentsAPI, symptomsAPI } from './utils/api';
@@ -223,7 +223,7 @@ function OftalmoBot() {
   // Cargar doctores al montar el componente
   useEffect(() => {
     loadDoctors();
-  }, []);
+  }, [loadDoctors]);
 
   // Cambiar vista según el tipo de usuario
   useEffect(() => {
@@ -540,13 +540,7 @@ Si experimentas:
     }
   };
 
-  // Respuestas del bot para el chat
-  const botResponses = [
-    "Hola, describe tus síntomas y te ayudo a encontrar el especialista adecuado.",
-    "¿Tienes algún dolor ocular específico?",
-    "¿Cuándo comenzaron los síntomas?",
-    "¿Qué necesitas?"
-  ];
+
 
   const handleSendMessage = async () => {
     if (inputMessage.trim() === "") return;
@@ -622,7 +616,7 @@ Si experimentas:
         patientEmail: appointmentData.patientEmail
       };
 
-      const response = await appointmentsAPI.create(appointmentPayload);
+      await appointmentsAPI.create(appointmentPayload);
 
       alert('¡Cita agendada exitosamente! Te enviaremos una confirmación por email.');
       setShowAppointment(false);
