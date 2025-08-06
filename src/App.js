@@ -220,23 +220,7 @@ function OftalmoBot() {
     }
   ];
 
-  // Cargar doctores al montar el componente
-  useEffect(() => {
-    loadDoctors();
-  }, [loadDoctors]);
-
-  // Cambiar vista según el tipo de usuario
-  useEffect(() => {
-    if (isAuthenticated && user) {
-      setViewMode(user.userType);
-      if (user.userType === 'doctor') {
-        loadDoctorAppointments();
-      }
-    } else {
-      setViewMode('patient');
-    }
-  }, [isAuthenticated, user, loadDoctorAppointments]);
-
+  // Definir funciones antes de usar en useEffect
   const loadDoctors = useCallback(async () => {
     try {
       const response = await doctorsAPI.getAll();
@@ -248,7 +232,7 @@ function OftalmoBot() {
       setDoctors(mockDoctors);
       setFilteredDoctors(mockDoctors);
     }
-  }, []);
+  }, [mockDoctors]);
 
   // Cargar citas del médico
   const loadDoctorAppointments = useCallback(async () => {
@@ -294,6 +278,23 @@ function OftalmoBot() {
       }
     }
   }, [isAuthenticated, user]);
+
+  // Cargar doctores al montar el componente
+  useEffect(() => {
+    loadDoctors();
+  }, [loadDoctors]);
+
+  // Cambiar vista según el tipo de usuario
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      setViewMode(user.userType);
+      if (user.userType === 'doctor') {
+        loadDoctorAppointments();
+      }
+    } else {
+      setViewMode('patient');
+    }
+  }, [isAuthenticated, user, loadDoctorAppointments]);
 
   const handleRegister = async () => {
     if (!registerData.name || !registerData.email || !registerData.password) {
