@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Fondo circular azul -->
+  <circle cx="32" cy="32" r="30" fill="#2563eb" stroke="#1d4ed8" stroke-width="2"/>
+  
+  <!-- Ojo externo (blanco) -->
+  <ellipse cx="32" cy="32" rx="22" ry="14" fill="#ffffff"/>
+  
+  <!-- Iris (azul más claro) -->
+  <circle cx="32" cy="32" r="10" fill="#3b82f6"/>
+  
+  <!-- Pupila (negro) -->
+  <circle cx="32" cy="32" r="6" fill="#000000"/>
+  
+  <!-- Brillo en la pupila -->
+  <circle cx="29" cy="29" r="2" fill="#ffffff" opacity="0.8"/>
+  
+  <!-- Líneas de expresión del ojo -->
+  <path d="M10 32 Q32 18 54 32" stroke="#e5e7eb" stroke-width="1" fill="none" opacity="0.6"/>
+  <path d="M10 32 Q32 46 54 32" stroke="#e5e7eb" stroke-width="1" fill="none" opacity="0.6"/>
+</svg> 

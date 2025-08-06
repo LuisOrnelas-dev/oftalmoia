@@ -1,70 +1,219 @@
-# Getting Started with Create React App
+# OftalmoIA - Directorio de Oftalmólogos con IA
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Plataforma completa para conectar pacientes con oftalmólogos especializados, con análisis de síntomas mediante inteligencia artificial.
 
-## Available Scripts
+## 🚀 Características del MVP
 
-In the project directory, you can run:
+### Frontend (React)
+- **Interfaz moderna** con Tailwind CSS
+- **Sistema de autenticación** completo
+- **Búsqueda avanzada** de doctores con filtros
+- **Análisis de síntomas** con IA integrada
+- **Sistema de citas** funcional
+- **Chat bot** asistente virtual
+- **Diseño responsive** para todos los dispositivos
 
-### `npm start`
+### Backend (Node.js + Express)
+- **API REST** completa y documentada
+- **Autenticación JWT** segura
+- **Base de datos PostgreSQL** optimizada
+- **Integración con OpenAI** para análisis médico
+- **Validación robusta** de datos
+- **Seguridad implementada** (Helmet, Rate Limiting, CORS)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 📋 Requisitos Previos
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Node.js 18+**
+- **PostgreSQL 12+**
+- **OpenAI API Key** (para análisis de síntomas)
 
-### `npm test`
+## 🛠️ Instalación Rápida
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Opción 1: Script Automático (Recomendado)
 
-### `npm run build`
+```bash
+# Ejecutar script de configuración
+./start-dev.sh
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Opción 2: Instalación Manual
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Clonar el repositorio:**
+```bash
+git clone <tu-repositorio>
+cd doctor-directory
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Configurar base de datos PostgreSQL:**
+```bash
+# Crear base de datos
+createdb oftalmoia_db
 
-### `npm run eject`
+# Ejecutar script SQL
+psql -d oftalmoia_db -f backend/config/database.sql
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. **Configurar variables de entorno:**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Backend (.env):**
+```env
+PORT=5000
+NODE_ENV=development
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=oftalmoia_db
+DB_USER=postgres
+DB_PASSWORD=tu_password
+JWT_SECRET=tu_jwt_secret_super_seguro_aqui
+OPENAI_API_KEY=tu_openai_api_key_aqui
+CORS_ORIGIN=http://localhost:3000
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Frontend (.env):**
+```env
+REACT_APP_API_URL=http://localhost:5000/api
+REACT_APP_NAME=OftalmoIA
+REACT_APP_VERSION=1.0.0
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+4. **Instalar dependencias:**
+```bash
+# Frontend
+npm install
 
-## Learn More
+# Backend
+cd backend && npm install && cd ..
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+5. **Iniciar servidores:**
+```bash
+# Terminal 1 - Backend
+cd backend && npm run dev
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Terminal 2 - Frontend
+npm start
+```
 
-### Code Splitting
+## 🌐 URLs de Acceso
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **Frontend:** http://localhost:3000
+- **Backend API:** http://localhost:5000
+- **Health Check:** http://localhost:5000/api/health
 
-### Analyzing the Bundle Size
+## 📚 Documentación de la API
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Endpoints Principales
 
-### Making a Progressive Web App
+#### Autenticación
+- `POST /api/auth/register` - Registro de usuarios
+- `POST /api/auth/login` - Inicio de sesión
+- `GET /api/auth/profile` - Perfil del usuario
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#### Doctores
+- `GET /api/doctors` - Listar doctores con filtros
+- `GET /api/doctors/:id` - Obtener doctor específico
+- `GET /api/doctors/specialties/list` - Especialidades disponibles
 
-### Advanced Configuration
+#### Citas
+- `POST /api/appointments` - Crear cita
+- `GET /api/appointments/my-appointments` - Mis citas
+- `PUT /api/appointments/:id/status` - Actualizar estado
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+#### Análisis de Síntomas
+- `POST /api/symptoms/analyze` - Analizar síntomas con IA
+- `GET /api/symptoms/history` - Historial de análisis
 
-### Deployment
+## 🗄️ Estructura de la Base de Datos
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Tablas Principales
+- **users** - Usuarios (pacientes y doctores)
+- **doctors** - Perfiles médicos
+- **appointments** - Citas médicas
+- **reviews** - Reseñas de pacientes
+- **symptom_analyses** - Análisis de síntomas
 
-### `npm run build` fails to minify
+## 🔒 Seguridad
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **JWT Tokens** para autenticación
+- **bcrypt** para encriptación de contraseñas
+- **Helmet** para headers de seguridad
+- **Rate Limiting** para prevenir spam
+- **CORS** configurado
+- **Validación** de datos con express-validator
+
+## 🧪 Testing
+
+```bash
+# Backend
+cd backend && npm test
+
+# Frontend
+npm test
+```
+
+## 📦 Scripts Disponibles
+
+### Frontend
+- `npm start` - Iniciar servidor de desarrollo
+- `npm build` - Construir para producción
+- `npm test` - Ejecutar tests
+
+### Backend
+- `npm run dev` - Iniciar con nodemon
+- `npm start` - Iniciar en producción
+- `npm test` - Ejecutar tests
+
+## 🚀 Despliegue
+
+### Heroku
+1. Crear app en Heroku
+2. Configurar PostgreSQL addon
+3. Configurar variables de entorno
+4. Deploy con Git
+
+### Docker
+```dockerfile
+# Dockerfile para el backend
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+EXPOSE 5000
+CMD ["npm", "start"]
+```
+
+## 🔄 Próximas Mejoras
+
+- [ ] Sistema de notificaciones por email
+- [ ] Pagos en línea con Stripe
+- [ ] Chat en tiempo real
+- [ ] Dashboard de analytics
+- [ ] Sistema de reseñas completo
+- [ ] API de terceros (laboratorios, farmacias)
+- [ ] Aplicación móvil
+
+## 🐛 Solución de Problemas
+
+### Error de conexión a PostgreSQL
+```bash
+# Verificar que PostgreSQL esté corriendo
+brew services start postgresql  # macOS
+sudo systemctl start postgresql # Linux
+```
+
+### Error de CORS
+Verificar que `CORS_ORIGIN` en el backend coincida con la URL del frontend.
+
+### Error de OpenAI
+Verificar que `OPENAI_API_KEY` esté configurado correctamente.
+
+## 📞 Soporte
+
+Para soporte técnico o preguntas sobre la implementación, contacta al equipo de desarrollo.
+
+---
+
+**OftalmoIA** - Conectando pacientes con los mejores oftalmólogos de México 🇲🇽
+
+*Desarrollado con ❤️ para mejorar el acceso a la salud visual*

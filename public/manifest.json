@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "OftalmoIA",
+  "name": "OftalmoIA - Especialistas en Salud Ocular",
+  "description": "Plataforma inteligente para encontrar especialistas en oftalmología, analizar síntomas oculares y agendar citas médicas.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +21,8 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#2563eb",
+  "background_color": "#ffffff",
+  "categories": ["medical", "health", "productivity"],
+  "lang": "es"
 }

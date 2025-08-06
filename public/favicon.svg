@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Fondo -->
+  <rect width="32" height="32" rx="6" fill="#2563eb"/>
+  
+  <!-- Ojo -->
+  <ellipse cx="16" cy="16" rx="12" ry="8" fill="#ffffff"/>
+  <circle cx="16" cy="16" r="5" fill="#3b82f6"/>
+  <circle cx="16" cy="16" r="3" fill="#1e40af"/>
+  
+  <!-- Brillo -->
+  <circle cx="14" cy="14" r="1" fill="#ffffff"/>
+</svg> 
