@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { FaSearch, FaStethoscope, FaCalendarAlt, FaMapMarkerAlt, FaDollarSign, FaRobot, FaPaperPlane, FaTimes, FaUser, FaSignOutAlt, FaPhone, FaEnvelope, FaMedal, FaGraduationCap } from 'react-icons/fa';
 import { IoMdMedical } from 'react-icons/io';
 import ReactMarkdown from 'react-markdown';
@@ -174,8 +174,8 @@ function OftalmoBot() {
     }
   };
 
-  // Datos mock de doctores
-  const mockDoctors = [
+  // Datos mock de doctores (memoizado para evitar recreación)
+  const mockDoctors = useMemo(() => [
     {
       id: 1,
       name: "Dr. María González",
@@ -218,7 +218,7 @@ function OftalmoBot() {
       languages: ["Español"],
       image: "/api/placeholder/150/150"
     }
-  ];
+  ], []);
 
   // Definir funciones antes de usar en useEffect
   const loadDoctors = useCallback(async () => {
